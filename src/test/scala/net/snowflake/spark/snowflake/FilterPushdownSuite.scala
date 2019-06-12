@@ -66,7 +66,7 @@ class FilterPushdownSuite extends FunSuite {
         |AND ENDSWITH( test_string , 'suffix' )
         |AND CONTAINS( test_string , 'infix' )
         |AND ( test_int IN ( 2 , 3 , 4 ))
-        |""".stripMargin.lines.mkString(" ").trim
+        |""".stripMargin.linesIterator.mkString(" ").trim
     // scalastyle:on
     assert(whereClause.toString === expectedWhereClause)
   }
@@ -96,7 +96,7 @@ class FilterPushdownSuite extends FunSuite {
       |AND test_date = '2013-04-05' ::DATE
       |AND test_timestamp = '2013-04-05 12:01:02.987' ::TIMESTAMP(3)
       |AND STARTSWITH( test_timestamp , '2013-04-05' )
-    """.stripMargin.lines.mkString(" ").trim
+    """.stripMargin.linesIterator.mkString(" ").trim
     // scalastyle:on
     assert(whereClause.toString === expectedWhereClause)
   }
@@ -113,7 +113,7 @@ class FilterPushdownSuite extends FunSuite {
     """
       |WHERE test_bool = true
       |AND test_int = 7
-    """.stripMargin.lines.mkString(" ").trim
+    """.stripMargin.linesIterator.mkString(" ").trim
     // scalastyle:on
     assert(whereClause.toString === expectedWhereClause)
   }
@@ -139,7 +139,7 @@ class FilterPushdownSuite extends FunSuite {
       |WHERE (( test_bool = true ) OR ( test_int = 7 ))
       |AND (( (NOT ( ( test_int IS NULL) )) ) OR ( ( test_float IS NOT NULL) ))
       |AND (( test_bool = true ) OR ( (( test_float = 3.13 ) AND ( (NOT ( test_int = 7 )) )) ))
-    """.stripMargin.lines.mkString(" ").trim
+    """.stripMargin.linesIterator.mkString(" ").trim
     // scalastyle:on
     assert(whereClause.toString === expectedWhereClause)
   }
